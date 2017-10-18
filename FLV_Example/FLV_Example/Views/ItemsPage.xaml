@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
 			 x:Class="FLV_Example.ItemsPage"
 			  Title="{Binding Title}"
 			 x:Name="BrowseItemsPage">
@@ -40,6 +41,29 @@
 					</DataTemplate>
 				</ListView.ItemTemplate>
 			</ListView>
+			<flv:FlowListView FlowItemsSource="{Binding ItemListGrouped}"
+							  HasUnevenRows="True"
+							  IsGroupingEnabled="True"
+							  FlowGroupDisplayBinding="{Binding Key}"
+							  FlowColumnExpand="Proportional">
+				<flv:FlowListView.GroupHeaderTemplate>
+					<DataTemplate>
+						<ViewCell>
+							<Label Text="{Binding Key}"/>
+						</ViewCell>
+					</DataTemplate>
+				</flv:FlowListView.GroupHeaderTemplate>
+				<flv:FlowListView.FlowColumnTemplate>
+					<DataTemplate>
+						<StackLayout>
+							<Label Text="{Binding Text}"
+									   FontSize="16" />
+							<Label Text="{Binding Description}"
+									   FontSize="13" />
+						</StackLayout>
+					</DataTemplate>
+				</flv:FlowListView.FlowColumnTemplate>
+			</flv:FlowListView>
 			<Button Text="Ascend"
 					Clicked="Button_Clicked"/>
 			<Button Text="Descend"
