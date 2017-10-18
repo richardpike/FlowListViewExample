@@ -7,13 +7,22 @@
 	<ContentPage.Content>
 		<StackLayout>
 			<ListView x:Name="ItemsListView" 
-				ItemsSource="{Binding Items}"
+				ItemsSource="{Binding ItemListGrouped}"
 				VerticalOptions="FillAndExpand"
 				 HasUnevenRows="true"
 				 RefreshCommand="{Binding LoadItemsCommand}"
 				 IsPullToRefreshEnabled="true"
 				 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-				 CachingStrategy="RecycleElement">
+				 CachingStrategy="RecycleElement"
+				 IsGroupingEnabled="True"
+					  GroupDisplayBinding="{Binding Key}">
+				<ListView.GroupHeaderTemplate>
+					<DataTemplate>
+						<ViewCell>
+							<Label Text="{Binding Key}"/>
+						</ViewCell>
+					</DataTemplate>
+				</ListView.GroupHeaderTemplate>
 				<ListView.ItemTemplate>
 					<DataTemplate>
 						<ViewCell>
@@ -31,6 +40,10 @@
 					</DataTemplate>
 				</ListView.ItemTemplate>
 			</ListView>
+			<Button Text="Ascend"
+					Clicked="Button_Clicked"/>
+			<Button Text="Descend"
+					Clicked="Button_Clicked_1"/>
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

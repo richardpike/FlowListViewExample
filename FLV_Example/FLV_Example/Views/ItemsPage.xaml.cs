@@ -24,5 +24,15 @@ namespace FLV_Example
 			if (viewModel.Items.Count == 0)
 				viewModel.LoadItemsCommand.Execute(null);
 		}
+
+		private void Button_Clicked(object sender, EventArgs e)
+		{
+			viewModel.AscendingItems();
+		}
+
+		private void Button_Clicked_1(object sender, EventArgs e)
+		{
+			viewModel.DescendingItems();
+		}
 	}
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FLV_Example.Helpers;
+using FLV_Example.Models;
+using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -10,6 +12,9 @@ namespace FLV_Example
 	public class ItemsViewModel : BaseViewModel
 	{
 		public ObservableCollection<Item> Items { get; set; }
+
+		public ObservableRangeCollection<Grouping<string, Item>> ItemListGrouped { get; set; } = new ObservableRangeCollection<Grouping<string, Item>>();
+
 		public Command LoadItemsCommand { get; set; }
 
 		public ItemsViewModel()
@@ -34,6 +39,8 @@ namespace FLV_Example
 				{
 					Items.Add(item);
 				}
+
+				AscendingItems();
 			}
 			catch (Exception ex)
 			{
@@ -43,6 +50,16 @@ namespace FLV_Example
 			{
 				IsBusy = false;
 			}
+		}
+
+		public void AscendingItems()
+		{
+			ItemListGrouped.ReplaceRange(Items.GroupByIDAscending());
+		}
+
+		public void DescendingItems()
+		{
+			ItemListGrouped.ReplaceRange(Items.GroupByIDDescending());
 		}
 	}
 }
